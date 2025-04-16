@@ -13,6 +13,8 @@ import {
   getEnhancedTimeGradient,
   isDaytime
 } from '../utils/timeUtils';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Utensils, Calendar, Camera } from 'lucide-react';
 
 const Index = () => {
   const [selectedCity, setSelectedCity] = useState<City | null>(cities[0]);
@@ -104,6 +106,49 @@ const Index = () => {
               </TabsContent>
             </Tabs>
           </div>
+        </div>
+        
+        {/* New Feature Sections */}
+        <h2 className="text-3xl font-bold text-center text-white mt-16 mb-8">
+          24 Hours. One World. Infinite Stories
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {/* Local Cuisine Section */}
+          <Card className="backdrop-blur-sm bg-background/20 border-0 shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+            <CardHeader className="bg-amber-500/20 border-b border-amber-200/30">
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Utensils className="h-5 w-5" /> Local Cuisine
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 text-white/90">
+              <p>Discover what people are eating right now in different time zones. From breakfast in Tokyo to dinner in New York, explore the flavors of the world in real time.</p>
+            </CardContent>
+          </Card>
+          
+          {/* Daily Rituals Section */}
+          <Card className="backdrop-blur-sm bg-background/20 border-0 shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+            <CardHeader className="bg-violet-500/20 border-b border-violet-200/30">
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Calendar className="h-5 w-5" /> Daily Rituals
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 text-white/90">
+              <p>Experience daily life and customs across different cultures. From morning prayers in Cairo to evening commutes in London, witness the rhythm of global traditions.</p>
+            </CardContent>
+          </Card>
+          
+          {/* Live Moments Section */}
+          <Card className="backdrop-blur-sm bg-background/20 border-0 shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+            <CardHeader className="bg-rose-500/20 border-b border-rose-200/30">
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Camera className="h-5 w-5" /> Live Moments
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 text-white/90">
+              <p>See real-time photos and stories from around the globe. Curated snapshots of current moments happening right now across different cities and time zones.</p>
+            </CardContent>
+          </Card>
         </div>
         
         <footer className="mt-12 text-center text-white/70 text-sm">

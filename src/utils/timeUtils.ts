@@ -70,19 +70,19 @@ export const getTimeGradient = (date: Date): string => {
   
   switch (timeOfDay) {
     case 'dawn':
-      return 'linear-gradient(to bottom, #ff7e5f, #feb47b)';
+      return 'linear-gradient(to bottom, #ffb347, #ffcc33)';
     case 'morning':
-      return 'linear-gradient(to bottom, #4da0b0, #d39d38)';
+      return 'linear-gradient(to bottom, #ffcc33, #FF8C00)';
     case 'afternoon':
-      return 'linear-gradient(to bottom, #2193b0, #6dd5ed)';
+      return 'linear-gradient(to bottom, #FF8C00, #FF4500)';
     case 'dusk':
-      return 'linear-gradient(to bottom, #355c7d, #6c5b7b, #c06c84)';
+      return 'linear-gradient(to bottom, #FF4500, #8A2BE2)';
     case 'evening':
-      return 'linear-gradient(to bottom, #2c3e50, #4ca1af)';
+      return 'linear-gradient(to bottom, #4B0082, #191970)';
     case 'night':
-      return 'linear-gradient(to bottom, #232526, #414345)';
+      return 'linear-gradient(to bottom, #191970, #000033)';
     default:
-      return 'linear-gradient(to bottom, #2193b0, #6dd5ed)';
+      return 'linear-gradient(to bottom, #ffcc33, #FF8C00)';
   }
 };
 
@@ -94,19 +94,19 @@ export const getEnhancedTimeGradient = (date: Date): string => {
   
   switch (timeOfDay) {
     case 'dawn':
-      return 'linear-gradient(135deg, #ff9966 0%, #ff5e62 100%)';
+      return 'linear-gradient(135deg, #FEF9D7 0%, #ff9966 100%)';
     case 'morning':
-      return 'linear-gradient(to right, #00b4db 0%, #FEF9D7 100%)';
+      return 'linear-gradient(135deg, #ff9966 0%, #ff5e62 100%)';
     case 'afternoon':
-      return 'linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)';
+      return 'linear-gradient(to right, #f83600 0%, #FEF9D7 100%)';
     case 'dusk':
       return 'linear-gradient(to right, #f83600 0%, #f9d423 100%)';
     case 'evening':
-      return 'linear-gradient(to right, #0f2027 0%, #203a43 50%, #2c5364 100%)';
+      return 'linear-gradient(to right, #4B0082 0%, #6A5ACD 100%)';
     case 'night':
       return 'linear-gradient(to right, #0f0c29 0%, #302b63 50%, #24243e 100%)';
     default:
-      return 'linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)';
+      return 'linear-gradient(135deg, #ff9966 0%, #ff5e62 100%)';
   }
 };
 

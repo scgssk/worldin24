@@ -87,5 +87,57 @@ export const cities: City[] = [
       "Rio's Carnival is the biggest carnival in the world",
       "Rio was once the capital of Portugal - the only European capital outside of Europe"
     ]
+  },
+  {
+    id: "mumbai",
+    name: "Mumbai",
+    country: "India",
+    timezone: "Asia/Kolkata",
+    coordinates: [72.8777, 19.0760],
+    description: "Mumbai is India's financial center and the capital city of the state of Maharashtra.",
+    trivia: [
+      "Mumbai was previously known as Bombay until 1995",
+      "Mumbai's film industry, Bollywood, produces more films annually than Hollywood",
+      "The Dabbawala lunch delivery system in Mumbai is recognized for its exceptional efficiency and accuracy"
+    ]
+  },
+  {
+    id: "dubai",
+    name: "Dubai",
+    country: "United Arab Emirates",
+    timezone: "Asia/Dubai",
+    coordinates: [55.2708, 25.2048],
+    description: "Dubai is a city of skyscrapers, ports, and beaches, where big business takes place alongside sun-seeking tourism.",
+    trivia: [
+      "The Burj Khalifa in Dubai is the tallest building in the world",
+      "Dubai has the world's largest shopping mall by total area",
+      "About 85% of Dubai's population consists of expatriates"
+    ]
+  },
+  {
+    id: "paris",
+    name: "Paris",
+    country: "France",
+    timezone: "Europe/Paris",
+    coordinates: [2.3522, 48.8566],
+    description: "Paris is the capital and most populous city of France, known as the 'City of Light'.",
+    trivia: [
+      "The Eiffel Tower was originally intended as a temporary exhibit",
+      "Paris has only one stop sign in the entire city",
+      "The Louvre Museum would take about 100 days to see every piece of art"
+    ]
+  },
+  {
+    id: "riyadh",
+    name: "Riyadh",
+    country: "Saudi Arabia",
+    timezone: "Asia/Riyadh",
+    coordinates: [46.6753, 24.7136],
+    description: "Riyadh is the capital of Saudi Arabia and the largest city on the Arabian Peninsula.",
+    trivia: [
+      "Riyadh means 'gardens' in Arabic, referring to the historical date palm gardens in the area",
+      "The Kingdom Centre in Riyadh has a sky bridge offering 360-degree views of the city",
+      "Riyadh has transformed from a walled desert city to a major global metropolis in just 50 years"
+    ]
   }
 ];
