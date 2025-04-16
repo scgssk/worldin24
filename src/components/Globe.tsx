@@ -1,9 +1,8 @@
 
 import { useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, useLoader, extend, useThree } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { OrbitControls, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
-import { TextureLoader } from 'three';
 import { City } from '../data/cities';
 
 interface GlobeProps {
@@ -12,21 +11,17 @@ interface GlobeProps {
   selectedCity: City | null;
 }
 
-// Globe material that will be used for Earth
-const GlobeMaterial = (props: any) => {
-  // Use a placeholder URL for the earth texture
-  const earthTexture = useLoader(
-    TextureLoader, 
-    'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg'
-  );
+// Earth material with proper texture loading
+const GlobeMaterial = () => {
+  // Use the useTexture hook from drei instead of directly using TextureLoader
+  const texture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg');
   
   return (
     <meshPhongMaterial
-      map={earthTexture}
+      map={texture}
       emissive="#000000"
       emissiveIntensity={0.2}
       shininess={5}
-      {...props}
     />
   );
 };
@@ -89,7 +84,7 @@ const GlobeControls = ({
   );
 };
 
-// Main Globe scene
+// Main Globe scene with error handling
 const GlobeScene = ({ 
   cities, 
   onCitySelect,
@@ -188,11 +183,35 @@ const GlobeScene = ({
   );
 };
 
-// Main Globe component with Canvas
+// Main Globe component with Canvas and error boundary
 const Globe = ({ cities, onCitySelect, selectedCity }: GlobeProps) => {
+  const [hasError, setHasError] = useState(false);
+  
+  // Reset error state when props change
+  useEffect(() => {
+    setHasError(false);
+  }, [cities, selectedCity]);
+  
+  // Fallback UI if the 3D rendering fails
+  if (hasError) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-muted rounded-lg">
+        <div className="text-center p-6">
+          <h3 className="text-xl font-semibold mb-2">3D Globe Unavailable</h3>
+          <p className="text-muted-foreground">
+            Please try refreshing the page or use a different browser.
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [0, 0, 2.5], fov: 45 }}>
+      <Canvas 
+        camera={{ position: [0, 0, 2.5], fov: 45 }}
+        onError={() => setHasError(true)}
+      >
         <GlobeScene 
           cities={cities} 
           onCitySelect={onCitySelect} 

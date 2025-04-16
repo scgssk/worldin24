@@ -2,6 +2,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { City } from '../data/cities';
 import { getTimeOfDay, getCurrentTimeInTimezone } from '../utils/timeUtils';
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CitySelectorProps {
   cities: City[];
@@ -29,6 +30,10 @@ const getTimeIcon = (timeOfDay: string) => {
 };
 
 const CitySelector = ({ cities, selectedCity, onCitySelect }: CitySelectorProps) => {
+  if (!cities || cities.length === 0) {
+    return <Skeleton className="h-12 w-full" />;
+  }
+
   return (
     <div className="w-full overflow-auto">
       <Tabs defaultValue={selectedCity?.id || cities[0].id}>
