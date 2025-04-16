@@ -26,7 +26,7 @@ const GlobeMaterial = () => {
   );
 };
 
-// City marker component
+// City pin marker component
 const CityMarker = ({ 
   position, 
   isSelected, 
@@ -36,17 +36,41 @@ const CityMarker = ({
   isSelected: boolean;
   onClick: () => void;
 }) => {
+  // Create a pin shape pointing toward the center of the globe
+  const pinDirection = position.clone().normalize();
+  
   return (
-    <mesh position={position} onClick={onClick}>
-      <sphereGeometry args={[0.04, 16, 16]} />
-      <meshBasicMaterial color={isSelected ? '#ff3e00' : '#fff'} />
+    <group 
+      position={position} 
+      onClick={onClick}
+      lookAt={new THREE.Vector3(0, 0, 0)}
+    >
+      {/* Pin head */}
+      <mesh position={[0, 0.04, 0]}>
+        <sphereGeometry args={[0.018, 16, 16]} />
+        <meshBasicMaterial color={isSelected ? '#ff3e00' : '#ff5722'} />
+      </mesh>
+      
+      {/* Pin body - cone shape pointing toward the globe */}
+      <mesh rotation={[Math.PI, 0, 0]} position={[0, -0.01, 0]}>
+        <coneGeometry args={[0.015, 0.08, 16]} />
+        <meshBasicMaterial color={isSelected ? '#ff3e00' : '#ff5722'} />
+      </mesh>
+      
+      {/* Selection indicator ring */}
       {isSelected && (
-        <mesh position={[0, 0, 0]}>
-          <ringGeometry args={[0.05, 0.06, 32]} />
-          <meshBasicMaterial color="#ff3e00" transparent opacity={0.8} />
-        </mesh>
+        <group position={[0, 0.04, 0]}>
+          <mesh>
+            <ringGeometry args={[0.025, 0.035, 32]} />
+            <meshBasicMaterial color="#ffffff" transparent opacity={0.8} side={THREE.DoubleSide} />
+          </mesh>
+          <mesh position={[0, 0.001, 0]}>
+            <ringGeometry args={[0.025, 0.035, 32]} />
+            <meshBasicMaterial color="#ff3e00" transparent opacity={0.6} side={THREE.DoubleSide} />
+          </mesh>
+        </group>
       )}
-    </mesh>
+    </group>
   );
 };
 
@@ -92,18 +116,18 @@ const GlobeScene = ({
 }: GlobeProps) => {
   const globeRef = useRef<THREE.Mesh>(null);
   
-  // Convert lat/long to 3D positions
+  // Convert lat/long to 3D positions with improved accuracy
   const getCityPosition = (longitude: number, latitude: number): THREE.Vector3 => {
     // Convert from degrees to radians
     const phi = (90 - latitude) * (Math.PI / 180);
     const theta = (longitude + 180) * (Math.PI / 180);
     
-    // Calculate 3D position
+    // Calculate 3D position using spherical coordinates
     const x = -Math.sin(phi) * Math.cos(theta);
     const z = Math.sin(phi) * Math.sin(theta);
     const y = Math.cos(phi);
     
-    return new THREE.Vector3(x, y, z).multiplyScalar(1.02); // Slightly above globe surface
+    return new THREE.Vector3(x, y, z).multiplyScalar(1.05); // Position slightly above globe surface for pins
   };
   
   // Move camera to selected city
@@ -164,7 +188,7 @@ const GlobeScene = ({
         <GlobeMaterial />
       </mesh>
       
-      {/* City markers */}
+      {/* City markers - now as pins */}
       {cities.map((city) => {
         const position = getCityPosition(city.coordinates[0], city.coordinates[1]);
         return (
